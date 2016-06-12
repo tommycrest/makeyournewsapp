@@ -1,12 +1,8 @@
 <ion-view view-title="Makeyournews!!">
   <ion-content>
 	  <ion-list>
-      <ion-item ng-repeat="edition in editions" >
-		  <p>
-		  <button class="button button-full" ng-click="getSourceEdition(edition.hl,edition.ned)">
+      <ion-item ng-repeat="edition in editions" href="#/app/playlists/1" >
    			{{edition.label}}
-		  </button>
-		  </p>
       </ion-item>
     </ion-list>
   </ion-content>

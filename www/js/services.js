@@ -5,11 +5,29 @@
 
 angular.module('makeyournewsApp.feedService',[]).service('feedService',['$http', function($http){
     return {
-        parseFeed: function(url) {
+        parseFeed: function(url)  {			
             // return the parsed feed in json format
             return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
 		},
+		getFeedEdition: function(id)  {			
+            // return the parsed feed in json format
+			if(id == 1 ) {
+				url = 'http://news.google.com/news?cf=all&pz=1&as_qdr=h&ned=it&output=atom&scoring=n&num=15';
+			}
+            return $http.jsonp('//ajax.googleapis.com/ajax/services/feed/load?v=1.0&num=50&callback=JSON_CALLBACK&q=' + encodeURIComponent(url));
+		},
         query : function(feedSrc) { 
+			this.parseFeed(feedSrc).then( response => {
+				console.log(response);
+				playlists =  response.data.responseData.feed.entries;
+   			}); 
+		},
+		queryEdition: function(id) {
+			console.log(id);
+			if(id == 1 ) {
+				feedSrc = 'http://news.google.com/news?cf=all&pz=1&as_qdr=h&ned=it&output=atom&scoring=n&num=15';
+			}
+			
 			this.parseFeed(feedSrc).then( response => {
 				console.log(response);
 				playlists =  response.data.responseData.feed.entries;

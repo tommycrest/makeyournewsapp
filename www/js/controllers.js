@@ -40,6 +40,7 @@ angular.module('makeyournewsApp.controllers', [])
     }, 1000);
   };
 }).controller('PlaylistsCtrl', ['$scope', 'feedService',  '$sce', 'playlists', function($scope, feedService, $sce, playlists) {
+	console.log("hai cliccato");
   $scope.playlists = playlists;	
  
   $scope.convertToDate = function (stringDate){
@@ -90,7 +91,9 @@ angular.module('makeyournewsApp.controllers', [])
 	$scope.goToNews = function() {
 		$state.go('app.single');
 	}
-}]).controller('PlaylistCtrl', ['$scope', 'feedService', '$sce', 'playlists', function($scope, feedService, $sce, playslists) {
+}]).controller('PlaylistCtrl', ['$scope', 'feedService', '$sce', 'playlists', '$stateParams', function($scope, feedService, $sce, playslists, $stateParams) {
+	
+	console.log("hai cliccato");
 	
   $scope.playlists = playlists;
 		

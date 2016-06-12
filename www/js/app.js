@@ -796,9 +796,10 @@ angular.module('makeyournewsApp', ['ionic', 'makeyournewsApp.controllers', 'make
           templateUrl: 'templates/playlists.html',
           controller: 'PlaylistsCtrl',
 			resolve: {
-				playlists : ['feedService', function(feedService) {
-					feedService.query('http://news.google.com/news?cf=all&hl=it&pz=1&ned=it&output=atom');
-					return feedService.getEdtion();
+				playlists : [ 'feedService', function(feedService) {
+					
+						feedService.query('http://news.google.com/news?cf=all&hl=it&pz=1&ned=it&output=atom');
+						return feedService.getEdtion();
 				}]
 			}
 		}
@@ -806,15 +807,23 @@ angular.module('makeyournewsApp', ['ionic', 'makeyournewsApp.controllers', 'make
     })
 
   .state('app.single', {
-    url: '/playlist',
+    url: '/playlist/:id',
     views: {
       'menuContent': {
         templateUrl: 'templates/playlist.html',
         controller: 'PlaylistCtrl',
 		  resolve: {
-				playlists : ['feedService', function(feedService) {
-					feedService.query('http://news.google.com/news?cf=all&hl=it&pz=1&ned=it&output=atom');
-					return feedService.getEdtion();
+				playlists : ['$stateParams', 'feedService', function(feedService, $stateParams) {
+					 if( $stateParams.id != 0 ) {
+						feedService.queryFeed({id:parseInt($stateParams.id,10)});
+						return feedService.getEdtion();	 
+					 } else {
+						feedService.queryFeed({id:parseInt($stateParams.id,10)});
+						return feedService.getEdtion(); 
+					 }
+					
+					//feedService.queryFeed({id:parseInt($stateParams.id,10)});
+					//return feedService.getEdtion();
 				}]
 			}
       }
